@@ -10,6 +10,8 @@ namespace SalesCalculator {
         static void Main(string[] args) {
             
         }
+
+        //List2-15
         //売上データを読み込み、Saleオブジェクトのリストを返す
         static List<Sale> ReadSales(string filePath) {
             List<Sale> sales = new List<Sale>();

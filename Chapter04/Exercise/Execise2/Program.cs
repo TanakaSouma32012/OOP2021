@@ -30,15 +30,26 @@ namespace Execise2 {
                 Console.WriteLine(ym);
             }
         }
+        static YearMonth FindFirst21C(YearMonth[] ymCollection) {
+            foreach (var ym in ymCollection) {
+                if (ym.Is21Century)                     
+                    return ym;                
+            }
+            return null;
+        }
         
-        private static void Exercise2_4(YearMonth[] ym) {
-            throw new NotImplementedException();
+        private static void Exercise2_4(YearMonth[] ymCollection) {            
+            var yeamonth = FindFirst21C(ymCollection);
+            var s = yeamonth != null ? yeamonth.ToString() : "21世紀のデータはありません";
+            Console.WriteLine(s);
         }
 
-        private static void Exercise2_5(YearMonth[] ym) {
-            throw new NotImplementedException();
-        }
+        private static void Exercise2_5(YearMonth[] ymCollection) {
+            var s =  ymCollection.Select(n => n.AddOneMonth()).ToArray();
 
-        
+            foreach (var ym in s) {
+                Console.WriteLine(ym);
+            }
+        }        
     }
 }

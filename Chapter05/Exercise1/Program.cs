@@ -9,7 +9,7 @@ namespace Exercise1 {
         static void Main(string[] args) {
 #if false
             #region 問題5.1
-            var s1 =  Console.ReadLine();
+            var s1 = Console.ReadLine();
             var s2 = Console.ReadLine();
             if (string.Compare(s1,s2,ignoreCase:true) == 0) {
                 Console.WriteLine("等しい");
@@ -18,14 +18,7 @@ namespace Exercise1 {
             }
             #endregion
 #endif
-            #region 問題5.2
-
-
-
-
-
-
-            #endregion
+            
         }
     }
 }

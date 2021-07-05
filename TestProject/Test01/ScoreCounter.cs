@@ -6,10 +6,8 @@ namespace Test01 {
         private IEnumerable<Student> _score;
 
         // コンストラクタ
-        public ScoreCounter(List<Student> score) {
-            _score = score;
-
-
+        public ScoreCounter(string filePath) {
+            _score = ReadScore(filePath);
         }
 
 
@@ -31,13 +29,17 @@ namespace Test01 {
 
         //メソッドの概要： 
         public IDictionary<string, int> GetPerStudentScore() {
-            
+            var dict = new Dictionary<string, int>();
+            foreach (var srore in _score) {
+                if (dict.ContainsKey(srore.Subject))
+                    
+                    dict[srore.Subject] += srore.Score;
+                else                    
 
-
-
-
-
-
+                    dict[srore.Subject] = srore.Score;
+            }
+            return dict;
         }
     }
 }
+

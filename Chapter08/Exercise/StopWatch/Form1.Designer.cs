@@ -25,28 +25,33 @@ namespace StopWatch {
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tmdisp = new System.Windows.Forms.Timer(this.components);
             this.lbTimeDisp = new System.Windows.Forms.Label();
             this.btTimeSt = new System.Windows.Forms.Button();
             this.btTimeSp = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btLap = new System.Windows.Forms.Button();
+            this.btReset = new System.Windows.Forms.Button();
+            this.lbLapDisp = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
+            // 
+            // tmdisp
+            // 
+            this.tmdisp.Tick += new System.EventHandler(this.tmdisp_Tick_1);
             // 
             // lbTimeDisp
             // 
             this.lbTimeDisp.BackColor = System.Drawing.SystemColors.Highlight;
             this.lbTimeDisp.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbTimeDisp.Location = new System.Drawing.Point(14, 30);
+            this.lbTimeDisp.Location = new System.Drawing.Point(15, 30);
             this.lbTimeDisp.Name = "lbTimeDisp";
-            this.lbTimeDisp.Size = new System.Drawing.Size(428, 65);
+            this.lbTimeDisp.Size = new System.Drawing.Size(382, 65);
             this.lbTimeDisp.TabIndex = 0;
             // 
             // btTimeSt
             // 
-            this.btTimeSt.Location = new System.Drawing.Point(14, 115);
+            this.btTimeSt.Location = new System.Drawing.Point(15, 109);
             this.btTimeSt.Name = "btTimeSt";
-            this.btTimeSt.Size = new System.Drawing.Size(211, 101);
+            this.btTimeSt.Size = new System.Drawing.Size(188, 105);
             this.btTimeSt.TabIndex = 1;
             this.btTimeSt.Text = "タイマースタート";
             this.btTimeSt.UseVisualStyleBackColor = true;
@@ -54,39 +59,51 @@ namespace StopWatch {
             // 
             // btTimeSp
             // 
-            this.btTimeSp.Location = new System.Drawing.Point(231, 115);
+            this.btTimeSp.Location = new System.Drawing.Point(15, 216);
             this.btTimeSp.Name = "btTimeSp";
-            this.btTimeSp.Size = new System.Drawing.Size(211, 101);
+            this.btTimeSp.Size = new System.Drawing.Size(188, 105);
             this.btTimeSp.TabIndex = 1;
             this.btTimeSp.Text = "タイマーストップ";
             this.btTimeSp.UseVisualStyleBackColor = true;
             this.btTimeSp.Click += new System.EventHandler(this.btTimeSp_Click);
             // 
-            // button3
+            // btLap
             // 
-            this.button3.Location = new System.Drawing.Point(231, 222);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(211, 101);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "button1";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btLap.Location = new System.Drawing.Point(209, 216);
+            this.btLap.Name = "btLap";
+            this.btLap.Size = new System.Drawing.Size(188, 105);
+            this.btLap.TabIndex = 1;
+            this.btLap.Text = "ラップ→";
+            this.btLap.UseVisualStyleBackColor = true;
+            this.btLap.Click += new System.EventHandler(this.btLap_Click);
             // 
-            // button4
+            // btReset
             // 
-            this.button4.Location = new System.Drawing.Point(14, 222);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(211, 101);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "button1";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btReset.Location = new System.Drawing.Point(209, 109);
+            this.btReset.Name = "btReset";
+            this.btReset.Size = new System.Drawing.Size(188, 105);
+            this.btReset.TabIndex = 1;
+            this.btReset.Text = "リセット";
+            this.btReset.UseVisualStyleBackColor = true;
+            this.btReset.Click += new System.EventHandler(this.btReset_Click);
+            // 
+            // lbLapDisp
+            // 
+            this.lbLapDisp.FormattingEnabled = true;
+            this.lbLapDisp.ItemHeight = 12;
+            this.lbLapDisp.Location = new System.Drawing.Point(403, 30);
+            this.lbLapDisp.Name = "lbLapDisp";
+            this.lbLapDisp.Size = new System.Drawing.Size(168, 292);
+            this.lbLapDisp.TabIndex = 2;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 380);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(618, 380);
+            this.Controls.Add(this.lbLapDisp);
+            this.Controls.Add(this.btReset);
+            this.Controls.Add(this.btLap);
             this.Controls.Add(this.btTimeSp);
             this.Controls.Add(this.btTimeSt);
             this.Controls.Add(this.lbTimeDisp);
@@ -99,12 +116,13 @@ namespace StopWatch {
 
         #endregion
 
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer tmdisp;
         private System.Windows.Forms.Label lbTimeDisp;
         private System.Windows.Forms.Button btTimeSt;
         private System.Windows.Forms.Button btTimeSp;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btLap;
+        private System.Windows.Forms.Button btReset;
+        private System.Windows.Forms.ListBox lbLapDisp;
     }
 }
 

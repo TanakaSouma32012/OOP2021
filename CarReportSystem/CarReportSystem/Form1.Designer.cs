@@ -113,7 +113,7 @@ namespace CarReportSystem {
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 252);
+            this.label6.Location = new System.Drawing.Point(12, 264);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 12);
             this.label6.TabIndex = 0;
@@ -125,7 +125,7 @@ namespace CarReportSystem {
             this.tbReport.Location = new System.Drawing.Point(73, 126);
             this.tbReport.Multiline = true;
             this.tbReport.Name = "tbReport";
-            this.tbReport.Size = new System.Drawing.Size(367, 120);
+            this.tbReport.Size = new System.Drawing.Size(367, 132);
             this.tbReport.TabIndex = 1;
             // 
             // label7
@@ -221,7 +221,7 @@ namespace CarReportSystem {
             // 
             this.dgvRegistData.AllowUserToAddRows = false;
             this.dgvRegistData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRegistData.Location = new System.Drawing.Point(73, 252);
+            this.dgvRegistData.Location = new System.Drawing.Point(74, 264);
             this.dgvRegistData.MultiSelect = false;
             this.dgvRegistData.Name = "dgvRegistData";
             this.dgvRegistData.RowTemplate.Height = 21;
@@ -246,7 +246,7 @@ namespace CarReportSystem {
             this.btPictureOpen.Name = "btPictureOpen";
             this.btPictureOpen.Size = new System.Drawing.Size(88, 23);
             this.btPictureOpen.TabIndex = 6;
-            this.btPictureOpen.Text = "開く…";
+            this.btPictureOpen.Text = "開く...";
             this.btPictureOpen.UseVisualStyleBackColor = true;
             this.btPictureOpen.Click += new System.EventHandler(this.btPictureOpen_Click);
             // 
@@ -264,7 +264,7 @@ namespace CarReportSystem {
             // 
             this.btDataAdd.Location = new System.Drawing.Point(446, 223);
             this.btDataAdd.Name = "btDataAdd";
-            this.btDataAdd.Size = new System.Drawing.Size(69, 23);
+            this.btDataAdd.Size = new System.Drawing.Size(69, 35);
             this.btDataAdd.TabIndex = 7;
             this.btDataAdd.Text = "追加";
             this.btDataAdd.UseVisualStyleBackColor = true;
@@ -274,7 +274,7 @@ namespace CarReportSystem {
             // 
             this.btDataCorrect.Location = new System.Drawing.Point(531, 223);
             this.btDataCorrect.Name = "btDataCorrect";
-            this.btDataCorrect.Size = new System.Drawing.Size(69, 23);
+            this.btDataCorrect.Size = new System.Drawing.Size(69, 35);
             this.btDataCorrect.TabIndex = 7;
             this.btDataCorrect.Text = "修正";
             this.btDataCorrect.UseVisualStyleBackColor = true;
@@ -284,7 +284,7 @@ namespace CarReportSystem {
             // 
             this.btDataDelete.Location = new System.Drawing.Point(615, 223);
             this.btDataDelete.Name = "btDataDelete";
-            this.btDataDelete.Size = new System.Drawing.Size(69, 23);
+            this.btDataDelete.Size = new System.Drawing.Size(69, 35);
             this.btDataDelete.TabIndex = 7;
             this.btDataDelete.Text = "削除";
             this.btDataDelete.UseVisualStyleBackColor = true;
@@ -292,21 +292,23 @@ namespace CarReportSystem {
             // 
             // btOpen
             // 
-            this.btOpen.Location = new System.Drawing.Point(9, 283);
+            this.btOpen.Location = new System.Drawing.Point(10, 287);
             this.btOpen.Name = "btOpen";
-            this.btOpen.Size = new System.Drawing.Size(58, 23);
+            this.btOpen.Size = new System.Drawing.Size(58, 44);
             this.btOpen.TabIndex = 8;
-            this.btOpen.Text = "開く…";
+            this.btOpen.Text = "開く...";
             this.btOpen.UseVisualStyleBackColor = true;
+            this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
             // 
             // btSave
             // 
-            this.btSave.Location = new System.Drawing.Point(9, 329);
+            this.btSave.Location = new System.Drawing.Point(10, 337);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(58, 23);
+            this.btSave.Size = new System.Drawing.Size(58, 44);
             this.btSave.TabIndex = 8;
-            this.btSave.Text = "保存…";
+            this.btSave.Text = "保存...";
             this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // cdAuthor
             // 
@@ -326,9 +328,9 @@ namespace CarReportSystem {
             // 
             // btExit
             // 
-            this.btExit.Location = new System.Drawing.Point(10, 404);
+            this.btExit.Location = new System.Drawing.Point(10, 395);
             this.btExit.Name = "btExit";
-            this.btExit.Size = new System.Drawing.Size(58, 23);
+            this.btExit.Size = new System.Drawing.Size(58, 44);
             this.btExit.TabIndex = 8;
             this.btExit.Text = "終了";
             this.btExit.UseVisualStyleBackColor = true;
@@ -361,7 +363,7 @@ namespace CarReportSystem {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 432);
+            this.ClientSize = new System.Drawing.Size(707, 447);
             this.Controls.Add(this.gbMaker);
             this.Controls.Add(this.cbCarName);
             this.Controls.Add(this.cdAuthor);

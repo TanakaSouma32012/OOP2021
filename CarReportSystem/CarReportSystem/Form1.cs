@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -46,9 +48,14 @@ namespace CarReportSystem {
                 Report = tbReport.Text,
                 Picture = pbPicture.Image
             };
-            listCarReport.Add(carReport); //1レコードの追加
+            listCarReport.Insert(0,carReport); //1レコードの追加
+
             setCbAuthor(cdAuthor.Text);
             setCbCarName(cbCarName.Text);
+
+            cdAuthor.Text = "";
+            cbCarName.Text = "";
+            tbReport.Clear();
         }
 
         private CarReport.MakarGroup selectedGroup() {
@@ -76,23 +83,22 @@ namespace CarReportSystem {
         }
 
         private void dgvRegistData_CellClick(object sender, DataGridViewCellEventArgs e) {
-            if (e.RowIndex > 0)
+            if (e.RowIndex == -1) {
                 return;
-
+            }
             CarReport selectedcar = listCarReport[e.RowIndex];
             btpDate.Value = selectedcar.Date;
-            cdAuthor.Text = selectedcar.Auther;
-            //foreach (var rb in gbMaker.Controls) {
-            //    if (selectedcar.Maker == (CarReport.MakarGroup)int.Parse((string)((RadioButton)rb).Tag)) {
-            //        ((RadioButton)rb).Checked = true;
-            //    }
-            //}
+            cdAuthor.Text = selectedcar.Auther;            
             setMakerRedioButton(selectedcar.Maker);
             cbCarName.Text = selectedcar.CarName;
             tbReport.Text = selectedcar.Report;
             pbPicture.Image = selectedcar.Picture;
 
-
+            //foreach (var rb in gbMaker.Controls) {
+            //    if (selectedcar.Maker == (CarReport.MakarGroup)int.Parse((string)((RadioButton)rb).Tag)) {
+            //        ((RadioButton)rb).Checked = true;
+            //    }
+            //}
         }
 
         private void setMakerRedioButton(CarReport.MakarGroup mg) {
@@ -127,9 +133,33 @@ namespace CarReportSystem {
                 btpDate.Value,   cdAuthor.Text,
                 selectedGroup(), cbCarName.Text,
                 tbReport.Text,   pbPicture.Image);
-            dgvRegistData.Update();
 
+            dgvRegistData.Refresh();  //コントロールの強制再描画
+        }
 
+        private void btSave_Click(object sender, EventArgs e) {
+            if (sfdFileSave.ShowDialog() == DialogResult.OK) {
+                //バイナリ形式でシリアル化
+                var bf = new BinaryFormatter();
+
+                using (FileStream fs = File.Open(sfdFileSave.FileName,FileMode.Create)) {
+                    bf.Serialize(fs, listCarReport);
+                }
+            }
+        }
+
+        private void btOpen_Click(object sender, EventArgs e) {
+            if (ofdFileOpen.ShowDialog() == DialogResult.OK) {
+                //バイナリ形式で逆シリアル化
+                var bf = new BinaryFormatter();
+
+                using (FileStream fs = File.Open(ofdFileOpen.FileName,FileMode.Open, FileAccess.Read)) {
+                    //逆シリアル化して読み込む
+                    listCarReport = (BindingList<CarReport>)bf.Deserialize(fs);
+                    dgvRegistData.DataSource = null;
+                    dgvRegistData.DataSource = listCarReport;
+                }
+            }
         }
     }
 }

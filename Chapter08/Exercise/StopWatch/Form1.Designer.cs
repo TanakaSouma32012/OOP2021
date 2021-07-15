@@ -100,7 +100,7 @@ namespace StopWatch {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 380);
+            this.ClientSize = new System.Drawing.Size(589, 337);
             this.Controls.Add(this.lbLapDisp);
             this.Controls.Add(this.btReset);
             this.Controls.Add(this.btLap);

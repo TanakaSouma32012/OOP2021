@@ -15,8 +15,7 @@ namespace Exercise3 {
             using (var writer = new StreamWriter(fp2,append:true)) {
                 foreach (var line in lines) {
                     writer.WriteLine(line);
-                }
-                
+                }                
             }
         }
     }

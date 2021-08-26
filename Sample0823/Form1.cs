@@ -19,14 +19,10 @@ namespace Sample0823
 
         private void Exec_Click(object sender, EventArgs e)
         {
-            var num = 1;
-
-            for (int i = 0; i < int.Parse(Jyou.Text); i++)
-            {
-                num *= int.Parse(Value.Text);
-
-            }
-            Result.Text = num.ToString();
+            var num1 = int.Parse(Value.Text);
+            var num2 = int.Parse(Jyou.Text);
+            
+            Result.Text = Math.Pow(num1,num2).ToString();
         }
     }
 }

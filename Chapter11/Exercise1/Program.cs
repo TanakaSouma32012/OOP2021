@@ -26,25 +26,29 @@ namespace Exercise1
         private static void Exercise1_1(string file)
         {
             var xdoc = XDocument.Load(file); //XMLファイルのロード
-            var novelists = xdoc.Root.Elements();
-            foreach (var novelist in novelists)
+            var sports = xdoc.Root.Elements()
+                            .Select(x => new { 
+                                Name = x.Element("name").Value,
+                                Teammembers = x.Element("teammembers").Value
+                            });
+            foreach (var s in sports)
             {
-                var xname = novelist.Element("name");
-                var xteammembers = novelist.Element("teammembers");
-                Console.WriteLine("{0} {1}",xname.Value,xteammembers.Value);
+                Console.WriteLine("{0} {1}",s.Name,s.Teammembers);
             }
         }
 
         private static void Exercise1_2(string file)
         {
             var xdoc = XDocument.Load(file); //XMLファイルのロード
-            var novelists = xdoc.Root.Elements().OrderBy(x => (int)x.Element("firstplayed"));
-            foreach (var novelist in novelists)
+            var novelists = xdoc.Root.Elements()
+                                .Select(x => new {
+                                    firstplayed = x.Element("firstplayed").Value,
+                                    name = x.Element("name").Attribute("kanji").Value
+                                }).OrderBy(x => int.Parse(x.firstplayed));
+            foreach (var s in novelists)
             {
-                var name = novelist.Element("name");
-                var kanzi = name.Attribute("kanji");
-                var firstplayed = novelist.Element("firstplayed");
-                Console.WriteLine("{0} {1}", kanzi.Value,firstplayed.Value);
+                
+                Console.WriteLine("{0} {1}",s.name,s.firstplayed);
             }
 
         }
@@ -52,12 +56,8 @@ namespace Exercise1
         private static void Exercise1_3(string file)
         {
             var xdoc = XDocument.Load(file); //XMLファイルのロード
-            var novelists = xdoc.Root.Elements().Max(x => x.Element("teammembers"));
+            var novelists = xdoc.Root.Elements().Max(x => (int)x.Element("teammembers"));
             
         }
-
-       
-
-       
     }
 }

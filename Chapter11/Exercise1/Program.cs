@@ -12,6 +12,7 @@ namespace Exercise1
         static void Main(string[] args)
         {
             var file = "Sample.xml";
+            var file2 = "11_2.xml";
             Exercise1_1(file);
             Console.WriteLine("-------------------");
 
@@ -22,6 +23,9 @@ namespace Exercise1
             Console.WriteLine("-------------------");
 
             Exercise1_4(file);
+            Console.WriteLine("-------------------");
+
+            Exercise2(file2);
             Console.WriteLine("-------------------");
 
         }
@@ -76,15 +80,42 @@ namespace Exercise1
 
         private static void Exercise1_4(string file)
         {
-            var newfile = "sports.xml";
-            var element = new XElement("ballsport",
-                                new XElement("name", "サッカー", new XAttribute("kanji", "蹴球 ")),
-                                new XElement("teammembers", "11"),
-                                new XElement("firstplayed", "1848")
-                                );
-            var xdoc = XDocument.Load(file);
-            xdoc.Root.Add(element);
-            xdoc.Save(newfile);
+            //var newfile = "sports.xml";
+            //var element = new XElement("ballsport",
+            //                    new XElement("name", "サッカー", new XAttribute("kanji", "蹴球 ")),
+            //                    new XElement("teammembers", "11"),
+            //                    new XElement("firstplayed", "1848")
+            //                    );
+            //var xdoc = XDocument.Load(file);
+            //xdoc.Root.Add(element);
+            //xdoc.Save(newfile);
+        }
+
+        private static void Exercise2(string file)
+        {
+            var xdoc = XDocument.Load(file); //XMLファイルのロード
+
+            var newfile1 = "11_2new.xml";//XMLファイルの作成
+            xdoc.Save(newfile1);
+
+            var newfile2 = XDocument.Load("11_2new.xml");//XMLファイルのロード
+
+            var sports = xdoc.Root.Elements()
+                            .Select(x => new {
+                                Kanji = x.Element("kanji").Value,
+                                Yomi = x.Element("yomi").Value
+                            });
+
+            var element = new XElement("difficultkanji");
+            newfile2.Root.Add(element);
+
+            foreach (var s in sports)
+            {
+                var element2 =  new XElement(new XElement("kanji", s.Kanji, new XAttribute("yomi", s.Yomi)));
+                newfile2.Root.Add(element2);
+                newfile2.Save(newfile2.ToString());
+            }
+            
         }
     }
 }

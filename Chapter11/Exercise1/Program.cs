@@ -56,7 +56,16 @@ namespace Exercise1
         private static void Exercise1_3(string file)
         {
             var xdoc = XDocument.Load(file); //XMLファイルのロード
-            var novelists = xdoc.Root.Elements().Max(x => (int)x.Element("teammembers"));
+            var novelists = xdoc.Root.Elements()
+                                .Select(x => new 
+                                {
+                                    teammembers = x.Element("teammembers").Value,
+                                     name = x.Element("name").Value
+                                })
+                                .OrderByDescending(x => int.Parse(x.teammembers))
+                                .First();
+            
+                Console.WriteLine("{0}", novelists.name);
             
         }
     }

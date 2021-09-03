@@ -21,15 +21,63 @@ namespace Section
         //コンストラクタ
         public Program()
         {
-            //DownloadString();
-            //DownloadFileAsync();
-            //OpenReadSample();
-            var results = GetWeatherReportFromYahoo(4210);
-            foreach (var s in results)
+            Console.WriteLine("Yahoo！週間天気予報");
+            Console.WriteLine();
+            Console.WriteLine("地域コードを入力");
+            Console.WriteLine("1:前橋");
+            Console.WriteLine("2:みなかみ");
+            Console.WriteLine("3:宇都宮");
+            Console.WriteLine("4:水戸");
+            Console.WriteLine("9:その他");
+            Console.WriteLine();
+            Console.Write(">");
+            int num = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            switch (num)
             {
-                Console.WriteLine(s);
+                case 1:
+                    var results1 = GetWeatherReportFromYahoo(4210);
+                    foreach (var s in results1)
+                    {
+                        Console.WriteLine(s);
+                    }
+                    Console.ReadLine();
+                    break;
+                case 2:
+                    var results2 = GetWeatherReportFromYahoo(4220);
+                    foreach (var s in results2)
+                    {
+                        Console.WriteLine(s);
+                    }
+                    Console.ReadLine();
+                    break;
+                case 3:
+                    var results3 = GetWeatherReportFromYahoo(4110);
+                    foreach (var s in results3)
+                    {
+                        Console.WriteLine(s);
+                    }
+                    Console.ReadLine();
+                    break;
+                case 4:
+                    var results4 = GetWeatherReportFromYahoo(4010);
+                    foreach (var s in results4)
+                    {
+                        Console.WriteLine(s);
+                    }
+                    Console.ReadLine();
+                    break;
+                case 9:
+                    Console.WriteLine("コードを入力して下さい");
+                    int n9 = int.Parse(Console.ReadLine());
+                    var results9 = GetWeatherReportFromYahoo(n9);
+                    foreach (var s in results9)
+                    {
+                        Console.WriteLine(s);
+                    }
+                    Console.ReadLine();
+                    break;
             }
-            Console.ReadLine();
         }
 
         //リスト14.15
@@ -96,5 +144,7 @@ namespace Section
                 }
             }
         }
+
+
     }
 }

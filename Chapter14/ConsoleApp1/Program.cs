@@ -12,11 +12,20 @@ namespace Section
 {
     class Program
     {
+        
+        Dictionary<string,int> AreaDic = new Dictionary<string,int>()
+        {
+            { "前橋",4210},
+            { "みなかみ",4220},
+            { "宇都宮", 4110},
+            { "水戸", 4010},
+        };
         static void Main(string[] args)
         {
             new Program();
         }
 
+        List<int> cityCode = new List<int>();
 
         //コンストラクタ
         public Program()
@@ -24,60 +33,103 @@ namespace Section
             Console.WriteLine("Yahoo！週間天気予報");
             Console.WriteLine();
             Console.WriteLine("地域コードを入力");
-            Console.WriteLine("1:前橋");
-            Console.WriteLine("2:みなかみ");
-            Console.WriteLine("3:宇都宮");
-            Console.WriteLine("4:水戸");
+
+            //Console.WriteLine("1:前橋");
+            //Console.WriteLine("2:みなかみ");
+            //Console.WriteLine("3:宇都宮");
+            //Console.WriteLine("4:水戸");
+
+            int num1 = 1;
+            foreach (KeyValuePair<string,int> pair in AreaDic)
+            {
+                Console.WriteLine("{0}:{1}", num1++ , pair.Key);
+                cityCode.Add(pair.Value);
+            }
+ 
             Console.WriteLine("9:その他");
             Console.WriteLine();
             Console.Write(">");
-            int num = int.Parse(Console.ReadLine());
+            var num = Console.ReadLine();
             Console.WriteLine();
-            switch (num)
+
+            var pos = int.Parse(num);
+
+            IEnumerable<string> results;
+            int code;
+            if (pos != 9)
             {
-                case 1:
-                    var results1 = GetWeatherReportFromYahoo(4210);
-                    foreach (var s in results1)
-                    {
-                        Console.WriteLine(s);
-                    }
-                    Console.ReadLine();
-                    break;
-                case 2:
-                    var results2 = GetWeatherReportFromYahoo(4220);
-                    foreach (var s in results2)
-                    {
-                        Console.WriteLine(s);
-                    }
-                    Console.ReadLine();
-                    break;
-                case 3:
-                    var results3 = GetWeatherReportFromYahoo(4110);
-                    foreach (var s in results3)
-                    {
-                        Console.WriteLine(s);
-                    }
-                    Console.ReadLine();
-                    break;
-                case 4:
-                    var results4 = GetWeatherReportFromYahoo(4010);
-                    foreach (var s in results4)
-                    {
-                        Console.WriteLine(s);
-                    }
-                    Console.ReadLine();
-                    break;
-                case 9:
-                    Console.WriteLine("コードを入力して下さい");
-                    int n9 = int.Parse(Console.ReadLine());
-                    var results9 = GetWeatherReportFromYahoo(n9);
-                    foreach (var s in results9)
-                    {
-                        Console.WriteLine(s);
-                    }
-                    Console.ReadLine();
-                    break;
+               //results = GetWeatherReportFromYahoo(cityCode[pos - 1]);
+                code = cityCode[pos - 1];
             }
+            else
+            {
+                Console.Write("コードを入力して下さい");
+                var num2 = Console.ReadLine();
+                code = int.Parse(num2);
+
+                 //results = GetWeatherReportFromYahoo(int.Parse(num2));
+            }
+            results = GetWeatherReportFromYahoo(code);
+            foreach (var s in results)
+            {
+                Console.WriteLine(s);
+            }
+            Console.ReadLine();
+
+
+
+
+
+
+
+
+
+
+            //switch (num)
+            //{
+            //    case 1:
+            //        var results1 = GetWeatherReportFromYahoo(4210);
+            //        foreach (var s in results1)
+            //        {
+            //            Console.WriteLine(s);
+            //        }
+            //        Console.ReadLine();
+            //        break;
+            //    case 2:
+            //        var results2 = GetWeatherReportFromYahoo(4220);
+            //        foreach (var s in results2)
+            //        {
+            //            Console.WriteLine(s);
+            //        }
+            //        Console.ReadLine();
+            //        break;
+            //    case 3:
+            //        var results3 = GetWeatherReportFromYahoo(4110);
+            //        foreach (var s in results3)
+            //        {
+            //            Console.WriteLine(s);
+            //        }
+            //        Console.ReadLine();
+            //        break;
+            //    case 4:
+            //        var results4 = GetWeatherReportFromYahoo(4010);
+            //        foreach (var s in results4)
+            //        {
+            //            Console.WriteLine(s);
+            //        }
+            //        Console.ReadLine();
+            //        break;
+            //    case 9:
+            //        Console.WriteLine("コードを入力して下さい");
+            //        int n9 = int.Parse(Console.ReadLine());
+            //        var results9 = GetWeatherReportFromYahoo(n9);
+            //        foreach (var s in results9)
+            //        {
+            //            Console.WriteLine(s);
+            //        }
+            //        Console.ReadLine();
+            //        break;
+            //}
         }
 
         //リスト14.15

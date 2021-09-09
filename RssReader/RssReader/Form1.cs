@@ -27,6 +27,9 @@ namespace RssReader
             setRssTitle(tbUrl.Text);
 
         }
+
+        List<string> link = new List<string>();
+
         private void setRssTitle(string uri)
         {
             using (var wc = new WebClient())
@@ -38,26 +41,26 @@ namespace RssReader
                 var stream = wc.OpenRead(url);
 
                 XDocument xdoc = XDocument.Load(stream);
+
                 var nodes = xdoc.Root.Descendants("title");
                 var nodes2 = xdoc.Root.Descendants("link");
-
+                
                 foreach (var node in nodes)
-                { 
-                    foreach (var node2 in nodes2)
-                    {
-                        var u = Regex.Replace(node.Value, "","");
-                        lbTitles.Items.Add(u);
-                        lbTitles.Items.Add(node2.Value);
-                    }
+                {
+                    var u = Regex.Replace(node.Value, "", "");
+                    lbTitles.Items.Add(u);
+                    
+                }
+                foreach (var node2 in nodes2)
+                {
+                    link.Add(node2.Value);
                 }
             }
         }
 
         private void lbTitles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var item =  lbTitles.SelectedItem.ToString();
-            
-            wbBrowser.Navigate(item);
+            wbBrowser.Navigate(link[lbTitles.SelectedIndex]);
         }
     }
 }

@@ -39,12 +39,25 @@ namespace RssReader
 
                 XDocument xdoc = XDocument.Load(stream);
                 var nodes = xdoc.Root.Descendants("title");
+                var nodes2 = xdoc.Root.Descendants("link");
+
                 foreach (var node in nodes)
-                {
-                    var u = Regex.Replace(node.Value, "【|】", "");
-                    lbTitles.Items.Add(u);
+                { 
+                    foreach (var node2 in nodes2)
+                    {
+                        var u = Regex.Replace(node.Value, "","");
+                        lbTitles.Items.Add(u);
+                        lbTitles.Items.Add(node2.Value);
+                    }
                 }
             }
+        }
+
+        private void lbTitles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var item =  lbTitles.SelectedItem.ToString();
+            
+            wbBrowser.Navigate(item);
         }
     }
 }

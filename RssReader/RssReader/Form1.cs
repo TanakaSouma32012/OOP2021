@@ -58,7 +58,8 @@ namespace RssReader
             }
         }
 
-        private void lbTitles_SelectedIndexChanged(object sender, EventArgs e)
+        
+        private void lbTitles_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             wbBrowser.Navigate(link[lbTitles.SelectedIndex]);
         }

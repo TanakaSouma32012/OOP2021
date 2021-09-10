@@ -87,10 +87,9 @@ namespace RssReader
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(14, 56);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 15);
+            this.label2.Size = new System.Drawing.Size(316, 57);
             this.label2.TabIndex = 5;
             this.label2.Text = "label2";
             // 

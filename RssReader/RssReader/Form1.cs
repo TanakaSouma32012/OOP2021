@@ -16,7 +16,7 @@ namespace RssReader
     public partial class Form1 : Form
     {
         private object cityCode;
-
+        public string weburl = null;
         public Form1()
         {
             InitializeComponent();
@@ -28,10 +28,11 @@ namespace RssReader
 
         }
 
-        List<string> link = new List<string>();
-        List<string> link3 = new List<string>();
-
-        private void setRssTitle(string uri)
+        public List<string> link = new List<string>();
+        List<string> link4 = new List<string>();
+        List<string> link5 = new List<string>();
+        
+        public void setRssTitle(string uri)
         {
             using (var wc = new WebClient())
             {
@@ -47,6 +48,8 @@ namespace RssReader
                 var nodes = xdoc.Root.Descendants("title");
                 var nodes2 = xdoc.Root.Descendants("link");
                 var nodes3 = xdoc.Root.Descendants("comments");
+                var nodes4 = xdoc.Root.Descendants("description");
+                var nodes5 = xdoc.Root.Descendants("pubDate");
                 
                 foreach (var node in nodes)
                 {
@@ -61,20 +64,33 @@ namespace RssReader
                     
 
                 }
-                foreach (var node3 in nodes3)
+                foreach (var node4 in nodes4)
                 {
-                    link3.Add(node3.Value);
+                    link4.Add(node4.Value);
                 }
-                
+                foreach (var node5 in nodes5)
+                {
+                    link5.Add(node5.Value);
+                }
+
             }
         }
 
         
         private void lbTitles_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            wbBrowser.Navigate(link[lbTitles.SelectedIndex]);
-            //label2.Text = null;
-            //label2.Text = link3[lbTitles.SelectedIndex];
+            weburl = link[lbTitles.SelectedIndex];
+            label2.Text = link4[lbTitles.SelectedIndex];
+            label3.Text = link5[lbTitles.SelectedIndex];
+        }
+
+        private void btWeb_Click(object sender, EventArgs e)
+        {
+            
+            var form2 = new Form2(weburl);
+            form2.Show();
+            
+
         }
     }
 }

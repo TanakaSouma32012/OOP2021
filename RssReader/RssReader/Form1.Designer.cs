@@ -32,9 +32,10 @@ namespace RssReader
             this.label1 = new System.Windows.Forms.Label();
             this.tbUrl = new System.Windows.Forms.TextBox();
             this.lbTitles = new System.Windows.Forms.ListBox();
-            this.wbBrowser = new System.Windows.Forms.WebBrowser();
             this.btRead = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.btWeb = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -59,25 +60,15 @@ namespace RssReader
             // 
             this.lbTitles.FormattingEnabled = true;
             this.lbTitles.ItemHeight = 15;
-            this.lbTitles.Location = new System.Drawing.Point(12, 116);
+            this.lbTitles.Location = new System.Drawing.Point(12, 161);
             this.lbTitles.Name = "lbTitles";
-            this.lbTitles.Size = new System.Drawing.Size(318, 739);
+            this.lbTitles.Size = new System.Drawing.Size(318, 694);
             this.lbTitles.TabIndex = 2;
             this.lbTitles.SelectedIndexChanged += new System.EventHandler(this.lbTitles_SelectedIndexChanged_1);
             // 
-            // wbBrowser
-            // 
-            this.wbBrowser.AllowWebBrowserDrop = false;
-            this.wbBrowser.Location = new System.Drawing.Point(336, 56);
-            this.wbBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.wbBrowser.Name = "wbBrowser";
-            this.wbBrowser.ScriptErrorsSuppressed = true;
-            this.wbBrowser.Size = new System.Drawing.Size(899, 799);
-            this.wbBrowser.TabIndex = 3;
-            // 
             // btRead
             // 
-            this.btRead.Location = new System.Drawing.Point(1146, 15);
+            this.btRead.Location = new System.Drawing.Point(954, 12);
             this.btRead.Name = "btRead";
             this.btRead.Size = new System.Drawing.Size(107, 29);
             this.btRead.TabIndex = 4;
@@ -87,20 +78,41 @@ namespace RssReader
             // 
             // label2
             // 
+            this.label2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label2.Location = new System.Drawing.Point(14, 56);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(316, 57);
+            this.label2.Size = new System.Drawing.Size(316, 102);
             this.label2.TabIndex = 5;
             this.label2.Text = "label2";
+            // 
+            // btWeb
+            // 
+            this.btWeb.Location = new System.Drawing.Point(336, 161);
+            this.btWeb.Name = "btWeb";
+            this.btWeb.Size = new System.Drawing.Size(139, 48);
+            this.btWeb.TabIndex = 6;
+            this.btWeb.Text = "web表示ボタン";
+            this.btWeb.UseVisualStyleBackColor = true;
+            this.btWeb.Click += new System.EventHandler(this.btWeb_Click);
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(336, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(139, 40);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "label3";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 869);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btWeb);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btRead);
-            this.Controls.Add(this.wbBrowser);
             this.Controls.Add(this.lbTitles);
             this.Controls.Add(this.tbUrl);
             this.Controls.Add(this.label1);
@@ -115,10 +127,11 @@ namespace RssReader
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbUrl;
-        private System.Windows.Forms.ListBox lbTitles;
-        private System.Windows.Forms.WebBrowser wbBrowser;
         private System.Windows.Forms.Button btRead;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btWeb;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.ListBox lbTitles;
     }
 }
 

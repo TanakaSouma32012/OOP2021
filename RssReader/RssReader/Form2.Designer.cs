@@ -30,9 +30,9 @@ namespace RssReader
         private void InitializeComponent()
         {
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.wbBrowser = new System.Windows.Forms.WebBrowser();
             this.btBack = new System.Windows.Forms.Button();
             this.btsusumu = new System.Windows.Forms.Button();
+            this.wbBrowser = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
             // webBrowser1
@@ -43,15 +43,6 @@ namespace RssReader
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(800, 450);
             this.webBrowser1.TabIndex = 0;
-            // 
-            // wbBrowser
-            // 
-            this.wbBrowser.Location = new System.Drawing.Point(12, 56);
-            this.wbBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.wbBrowser.Name = "wbBrowser";
-            this.wbBrowser.ScriptErrorsSuppressed = true;
-            this.wbBrowser.Size = new System.Drawing.Size(776, 382);
-            this.wbBrowser.TabIndex = 1;
             // 
             // btBack
             // 
@@ -73,6 +64,16 @@ namespace RssReader
             this.btsusumu.UseVisualStyleBackColor = true;
             this.btsusumu.Click += new System.EventHandler(this.btsusumu_Click);
             // 
+            // wbBrowser
+            // 
+            this.wbBrowser.Location = new System.Drawing.Point(12, 56);
+            this.wbBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wbBrowser.Name = "wbBrowser";
+            this.wbBrowser.ScriptErrorsSuppressed = true;
+            this.wbBrowser.Size = new System.Drawing.Size(776, 382);
+            this.wbBrowser.TabIndex = 1;
+            this.wbBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.wbBrowser_DocumentCompleted);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -92,8 +93,8 @@ namespace RssReader
         #endregion
 
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.WebBrowser wbBrowser;
         private System.Windows.Forms.Button btBack;
         private System.Windows.Forms.Button btsusumu;
+        private System.Windows.Forms.WebBrowser wbBrowser;
     }
 }

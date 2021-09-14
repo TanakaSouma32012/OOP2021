@@ -90,7 +90,7 @@ namespace RssReader
             // 
             this.btWeb.Location = new System.Drawing.Point(336, 161);
             this.btWeb.Name = "btWeb";
-            this.btWeb.Size = new System.Drawing.Size(139, 48);
+            this.btWeb.Size = new System.Drawing.Size(218, 120);
             this.btWeb.TabIndex = 6;
             this.btWeb.Text = "web表示ボタン";
             this.btWeb.UseVisualStyleBackColor = true;

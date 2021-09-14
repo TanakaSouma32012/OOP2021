@@ -26,20 +26,24 @@ namespace RssReader
 
         private void btBack_Click(object sender, EventArgs e)
         {
-            if (wbBrowser.CanGoBack == true)
-            {
-                wbBrowser.GoBack();
-            }
             
+            wbBrowser.GoBack();
+            
+
         }
 
         private void btsusumu_Click(object sender, EventArgs e)
         {
-            if (wbBrowser.CanGoForward == true)
-            {
-                wbBrowser.GoForward();
-            }
             
+            wbBrowser.GoForward();
+            
+            
+        }
+        //ページの読み込みが終わると呼ばれる
+        private void wbBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            btBack.Enabled = wbBrowser.CanGoBack;
+            btsusumu.Enabled = wbBrowser.CanGoForward;
         }
     }
 }

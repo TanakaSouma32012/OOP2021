@@ -86,10 +86,8 @@ namespace RssReader
 
         private void btWeb_Click(object sender, EventArgs e)
         {
-            
             var form2 = new Form2(weburl);
             form2.Show();
-            
 
         }
     }

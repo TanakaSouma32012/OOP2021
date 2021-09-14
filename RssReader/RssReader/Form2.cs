@@ -26,12 +26,20 @@ namespace RssReader
 
         private void btBack_Click(object sender, EventArgs e)
         {
-            wbBrowser.GoBack();
+            if (wbBrowser.CanGoBack == true)
+            {
+                wbBrowser.GoBack();
+            }
+            
         }
 
         private void btsusumu_Click(object sender, EventArgs e)
         {
-            wbBrowser.GoForward();
+            if (wbBrowser.CanGoForward == true)
+            {
+                wbBrowser.GoForward();
+            }
+            
         }
     }
 }

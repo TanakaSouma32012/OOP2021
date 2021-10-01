@@ -36,85 +36,166 @@ namespace SendMail
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.tbMessage = new System.Windows.Forms.TextBox();
             this.btSend = new System.Windows.Forms.Button();
+            this.tbCc = new System.Windows.Forms.TextBox();
+            this.tbBcc = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btConfig = new System.Windows.Forms.Button();
+            this.btCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(9, 10);
+            this.label1.Location = new System.Drawing.Point(55, 5);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 30);
+            this.label1.Size = new System.Drawing.Size(41, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "送信先；";
+            this.label1.Text = "To:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(39, 51);
+            this.label2.Location = new System.Drawing.Point(33, 130);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 30);
+            this.label2.Size = new System.Drawing.Size(63, 24);
             this.label2.TabIndex = 0;
-            this.label2.Text = "件名；";
+            this.label2.Text = "件名:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(39, 93);
+            this.label3.Location = new System.Drawing.Point(33, 175);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 30);
+            this.label3.Size = new System.Drawing.Size(63, 24);
             this.label3.TabIndex = 0;
-            this.label3.Text = "本文；";
+            this.label3.Text = "本文:";
             // 
             // tbTo
             // 
             this.tbTo.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbTo.Location = new System.Drawing.Point(133, 10);
+            this.tbTo.Location = new System.Drawing.Point(100, 5);
+            this.tbTo.Margin = new System.Windows.Forms.Padding(2);
             this.tbTo.Name = "tbTo";
-            this.tbTo.Size = new System.Drawing.Size(634, 37);
+            this.tbTo.Size = new System.Drawing.Size(476, 31);
             this.tbTo.TabIndex = 1;
+            this.tbTo.Text = "32012@ojs.ac.jp";
             // 
             // tbTitle
             // 
             this.tbTitle.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbTitle.Location = new System.Drawing.Point(133, 53);
+            this.tbTitle.Location = new System.Drawing.Point(100, 130);
+            this.tbTitle.Margin = new System.Windows.Forms.Padding(2);
             this.tbTitle.Name = "tbTitle";
-            this.tbTitle.Size = new System.Drawing.Size(634, 37);
+            this.tbTitle.Size = new System.Drawing.Size(476, 31);
             this.tbTitle.TabIndex = 1;
             // 
             // tbMessage
             // 
             this.tbMessage.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbMessage.Location = new System.Drawing.Point(133, 96);
+            this.tbMessage.Location = new System.Drawing.Point(100, 175);
+            this.tbMessage.Margin = new System.Windows.Forms.Padding(2);
             this.tbMessage.Multiline = true;
             this.tbMessage.Name = "tbMessage";
-            this.tbMessage.Size = new System.Drawing.Size(634, 281);
+            this.tbMessage.Size = new System.Drawing.Size(476, 215);
             this.tbMessage.TabIndex = 1;
             // 
             // btSend
             // 
-            this.btSend.Location = new System.Drawing.Point(645, 383);
+            this.btSend.Location = new System.Drawing.Point(484, 394);
+            this.btSend.Margin = new System.Windows.Forms.Padding(2);
             this.btSend.Name = "btSend";
-            this.btSend.Size = new System.Drawing.Size(122, 55);
+            this.btSend.Size = new System.Drawing.Size(92, 44);
             this.btSend.TabIndex = 2;
             this.btSend.Text = "送信";
             this.btSend.UseVisualStyleBackColor = true;
             this.btSend.Click += new System.EventHandler(this.btSend_Click);
             // 
+            // tbCc
+            // 
+            this.tbCc.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tbCc.Location = new System.Drawing.Point(100, 40);
+            this.tbCc.Margin = new System.Windows.Forms.Padding(2);
+            this.tbCc.Name = "tbCc";
+            this.tbCc.Size = new System.Drawing.Size(476, 31);
+            this.tbCc.TabIndex = 1;
+            // 
+            // tbBcc
+            // 
+            this.tbBcc.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tbBcc.Location = new System.Drawing.Point(100, 75);
+            this.tbBcc.Margin = new System.Windows.Forms.Padding(2);
+            this.tbBcc.Name = "tbBcc";
+            this.tbBcc.Size = new System.Drawing.Size(476, 31);
+            this.tbBcc.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label4.Location = new System.Drawing.Point(53, 40);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 24);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Cc:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label5.Location = new System.Drawing.Point(42, 75);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 24);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Bcc:";
+            // 
+            // btConfig
+            // 
+            this.btConfig.Location = new System.Drawing.Point(100, 395);
+            this.btConfig.Name = "btConfig";
+            this.btConfig.Size = new System.Drawing.Size(48, 28);
+            this.btConfig.TabIndex = 3;
+            this.btConfig.Text = "設定";
+            this.btConfig.UseVisualStyleBackColor = true;
+            this.btConfig.Click += new System.EventHandler(this.btConfig_Click);
+            // 
+            // btCancel
+            // 
+            this.btCancel.Location = new System.Drawing.Point(390, 394);
+            this.btCancel.Name = "btCancel";
+            this.btCancel.Size = new System.Drawing.Size(89, 44);
+            this.btCancel.TabIndex = 4;
+            this.btCancel.Text = "キャンセル";
+            this.btCancel.UseVisualStyleBackColor = true;
+            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(594, 453);
+            this.Controls.Add(this.btCancel);
+            this.Controls.Add(this.btConfig);
             this.Controls.Add(this.btSend);
             this.Controls.Add(this.tbMessage);
             this.Controls.Add(this.tbTitle);
+            this.Controls.Add(this.tbBcc);
+            this.Controls.Add(this.tbCc);
             this.Controls.Add(this.tbTo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "メール送信アプリ";
             this.ResumeLayout(false);
@@ -131,6 +212,12 @@ namespace SendMail
         private System.Windows.Forms.TextBox tbTitle;
         private System.Windows.Forms.TextBox tbMessage;
         private System.Windows.Forms.Button btSend;
+        private System.Windows.Forms.TextBox tbCc;
+        private System.Windows.Forms.TextBox tbBcc;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btConfig;
+        private System.Windows.Forms.Button btCancel;
     }
 }
 

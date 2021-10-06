@@ -3,20 +3,27 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace SendMail
 {
     public partial class ConfigForm : Form
     {
         private Settings settings = Settings.getInstance();
-
         public ConfigForm()
         {
             InitializeComponent();
+
+            
+
         }
 
         private void btDefault_Click(object sender, EventArgs e)
@@ -39,7 +46,7 @@ namespace SendMail
         {
             SettingRegist();
         }
-
+        
         public void SettingRegist() {
             try
             {

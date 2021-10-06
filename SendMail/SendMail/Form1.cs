@@ -10,7 +10,8 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
+using System.Xml;
+using System.Runtime.Serialization;
 
 namespace SendMail
 {
@@ -19,15 +20,38 @@ namespace SendMail
         //SmtpClientオブジェクト
         SmtpClient smtpClient = null;
 
-        
         //設定画面
         public ConfigForm configForm = new ConfigForm();
 
         //設定情報
         public Settings settings =Settings.getInstance();
 
+        //xmlファイルの作成
+        public static XmlWriter xmlConfigFile;
+        //
         public Form1()
         {
+            
+
+            if (xmlConfigFile == null)
+            {
+                xmlConfigFile = XmlWriter.Create("ConfigXml.xml");
+                xmlConfigFile.WriteStartDocument();
+                xmlConfigFile.Close();
+                var xws = new XmlWriterSettings
+                {
+                    Encoding = new UTF8Encoding(false),
+                    Indent = true,
+                    IndentChars = " "
+
+                };
+                using (xmlConfigFile = XmlWriter.Create("ConfigXml.xml", xws))
+                {
+                    var serializer = new DataContractSerializer(settings.GetType());
+                    serializer.WriteObject(xmlConfigFile, settings);
+                }
+                configForm.ShowDialog();
+            }
             InitializeComponent();
             btCancel.Enabled = false;
         }
@@ -128,5 +152,19 @@ namespace SendMail
             btCancel.Enabled = false;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            using (var reader = XmlReader.Create("ConfigXml.xml"))
+            {
+                var serializer = new DataContractSerializer(typeof(Settings));
+                var novel = serializer.ReadObject(reader) as Settings;
+            }
+            configForm.tbHost.Text = settings.Host; //ホスト名
+            configForm.tbPort.Text = settings.Port.ToString(); //ポート番号
+            configForm.tbPass.Text = settings.Pass; //パスワード
+            configForm.tbUserName.Text = settings.MailAddr; //ユーザ名
+            configForm.cbSSL.Checked = settings.Ssl; //SSL
+            configForm.tbSender.Text = settings.MailAddr; //送信元
+        }
     }
 }

@@ -234,21 +234,21 @@ namespace SendMail
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox tbPass;
-        private System.Windows.Forms.TextBox tbUserName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbPort;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbHost;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox cbSSL;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox tbSender;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btDefault;
         private System.Windows.Forms.Button btApply;
         private System.Windows.Forms.Button btCancel;
         private System.Windows.Forms.Button btOK;
+        public System.Windows.Forms.TextBox tbPass;
+        public System.Windows.Forms.TextBox tbUserName;
+        public System.Windows.Forms.TextBox tbPort;
+        public System.Windows.Forms.TextBox tbHost;
+        public System.Windows.Forms.CheckBox cbSSL;
+        public System.Windows.Forms.TextBox tbSender;
     }
 }

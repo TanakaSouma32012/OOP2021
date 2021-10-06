@@ -27,6 +27,7 @@ namespace SendMail
                 instance = new Settings();
             }
             return instance;
+
         }
 
 

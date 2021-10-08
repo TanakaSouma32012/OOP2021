@@ -22,8 +22,6 @@ namespace SendMail
         {
             InitializeComponent();
 
-            
-
         }
 
         private void btDefault_Click(object sender, EventArgs e)
@@ -38,34 +36,36 @@ namespace SendMail
 
         private void btOK_Click(object sender, EventArgs e)
         {
-            SettingRegist();
+            btApply_Click(sender,e);
             this.Close();
         }
 
         private void btApply_Click(object sender, EventArgs e)
         {
-            SettingRegist();
-        }
-        
-        public void SettingRegist() {
             try
             {
-                settings.Host = tbHost.Text;
-                settings.Port = int.Parse(tbPort.Text);
-                settings.Pass = tbPass.Text;
-                settings.MailAddr = tbUserName.Text;
-                settings.Ssl = cbSSL.Checked;
+                settings.setSendConfig(tbHost.Text, int.Parse(tbPort.Text),
+                                   tbUserName.Text, tbPass.Text, cbSSL.Checked);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+            //SettingRegist();
         }
-
         private void btCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ConfigForm_Load(object sender, EventArgs e)
+        {
+            tbHost.Text = settings.Host; //ホスト名
+            tbPort.Text = settings.Port.ToString(); //ポート番号
+            tbPass.Text = settings.Pass; //パスワード
+            tbUserName.Text = settings.MailAddr; //ユーザ名
+            cbSSL.Checked = settings.Ssl; //SSL
+            tbSender.Text = settings.MailAddr; //送信元
         }
     }
 }

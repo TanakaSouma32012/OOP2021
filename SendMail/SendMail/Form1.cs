@@ -24,34 +24,15 @@ namespace SendMail
         public ConfigForm configForm = new ConfigForm();
 
         //設定情報
-        public Settings settings =Settings.getInstance();
+        public Settings settings = Settings.getInstance();
+
 
         //xmlファイルの作成
         public static XmlWriter xmlConfigFile;
-        //
+
+
         public Form1()
         {
-            
-
-            if (xmlConfigFile == null)
-            {
-                xmlConfigFile = XmlWriter.Create("ConfigXml.xml");
-                xmlConfigFile.WriteStartDocument();
-                xmlConfigFile.Close();
-                var xws = new XmlWriterSettings
-                {
-                    Encoding = new UTF8Encoding(false),
-                    Indent = true,
-                    IndentChars = " "
-
-                };
-                using (xmlConfigFile = XmlWriter.Create("ConfigXml.xml", xws))
-                {
-                    var serializer = new DataContractSerializer(settings.GetType());
-                    serializer.WriteObject(xmlConfigFile, settings);
-                }
-                configForm.ShowDialog();
-            }
             InitializeComponent();
             btCancel.Enabled = false;
         }
@@ -59,10 +40,16 @@ namespace SendMail
 
         private void btSend_Click(object sender, EventArgs e)
         {
+            if (!Settings.ConfigDataChek)
+            {
+                MessageBox.Show("送信情報を設定してください");
+                return;
+            }
             try
             {
                 btSend.Enabled = false;
                 btCancel.Enabled = true;
+
                 //メース送信のためのインスタンスを生成
                 MailMessage mailMessage = new MailMessage();
                 //差出人アドレス
@@ -79,22 +66,33 @@ namespace SendMail
                 if (tbTo.Text != null)
                 {
                     mailMessage.To.Add(tbTo.Text);
-                } else
+                }
+                else
                 if (tbCc.Text != null)
                 {
                     mailMessage.CC.Add(tbCc.Text);
-                } else
+                }
+                else
                 if (tbBcc.Text != null)
                 {
                     mailMessage.Bcc.Add(tbBcc.Text);
                 }
-                
+
 
                 //件名（タイトル）
                 mailMessage.Subject = tbTitle.Text;
                 //本文
-                mailMessage.Body = tbMessage.Text;
+                if (tbMessage.Text != "" )
+                {
+                    mailMessage.Body = tbMessage.Text;
+                }
+                else
+                {
+                    MessageBox.Show("本文を入力してください");
+                    return;
+                }
                 
+
                 //メール送信のための認証情報を設定（ユーザー名、パスワード）
                 smtpClient.Credentials
                     = new NetworkCredential(settings.MailAddr/*"ojsinfosys01@gmail.com"*/, settings.Pass /*"Infosys2021"*/);
@@ -125,6 +123,7 @@ namespace SendMail
                 else
                 {
                     MessageBox.Show("送信が完了しました。");
+                    TextClear();
                 }
                 msg.Dispose();
                 btSend.Enabled = true;
@@ -133,8 +132,8 @@ namespace SendMail
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
-            }           
-            
+            }
+
 
         }
 
@@ -154,17 +153,30 @@ namespace SendMail
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using (var reader = XmlReader.Create("ConfigXml.xml"))
+            //起動時に送信情報が未設定の場合、設定画面を表示する
+            if (!Settings.ConfigDataChek)
             {
-                var serializer = new DataContractSerializer(typeof(Settings));
-                var novel = serializer.ReadObject(reader) as Settings;
+                configForm.ShowDialog();
             }
-            configForm.tbHost.Text = settings.Host; //ホスト名
-            configForm.tbPort.Text = settings.Port.ToString(); //ポート番号
-            configForm.tbPass.Text = settings.Pass; //パスワード
-            configForm.tbUserName.Text = settings.MailAddr; //ユーザ名
-            configForm.cbSSL.Checked = settings.Ssl; //SSL
-            configForm.tbSender.Text = settings.MailAddr; //送信元
+        }
+
+        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void 新規作成NToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextClear();
+        }
+
+        private void TextClear() 
+        {
+            tbTo.Text = null;
+            tbBcc.Text = null;
+            tbCc.Text = null;
+            tbTitle.Text = null;
+            tbMessage.Text = null;
         }
     }
 }

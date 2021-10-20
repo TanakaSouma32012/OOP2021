@@ -35,28 +35,29 @@ namespace SampleEntityFramework
             
             #endregion
 
-            /*2.*******/
+            
             Exercise13_1_1();
             
             Console.WriteLine("---------------------------------");
 
-            /*3.*******/
+            
             Exercise13_1_2();
 
             Console.WriteLine("---------------------------------");
-            /*3.*******/
+            
             Exercise13_1_3();
 
             Console.WriteLine("---------------------------------");
-            /*3.*******/
+            
             Exercise13_1_4();
 
             Console.WriteLine("---------------------------------");
-            /*3.*******/
+            
             Exercise13_1_5();
 
             Console.WriteLine("---------------------------------");
 
+           
 
             Console.WriteLine("---------------------------------");
 
@@ -67,11 +68,26 @@ namespace SampleEntityFramework
         {
             using (var db = new BooksDbContext())
             {
-                var authors = db.Books.OrderByDescending(o=>o.Author.Birthday);
-                foreach (var author in authors)
+
+                var authors = db.Books
+                                .OrderByDescending(o=>o.Author.Birthday)
+                                .Select(g=> new
+                                {
+                                    Name = g.Author.Name,
+                                    Title = g.Title,
+                                    PublishedYear = g.PublishedYear
+                                });
+                var group = authors.GroupBy(g=> g.Name);
+                foreach (var g in group)
                 {
-                    Console.WriteLine($"{author.Author.Name}:{author.Title}:{author.PublishedYear}");
+                    Console.WriteLine("--------");
+                    Console.WriteLine($"{g.Key}");
+                    foreach (var author in g)
+                    {
+                        Console.WriteLine($"{author.Title}:{author.PublishedYear}");
+                    }
                 }
+                
             }
         }
 
@@ -103,7 +119,7 @@ namespace SampleEntityFramework
                 var authors = db.Authors;
                 foreach (var author in authors)
                 {
-                    Console.WriteLine($"{author.Name}:{author.Gender}:{author.Birthday}");
+                    Console.WriteLine($"{author.Name}:{author.Gender}:{author.Birthday}:{author.Id}");
                 }
                 var books = db.Books;
                 foreach (var book in books)

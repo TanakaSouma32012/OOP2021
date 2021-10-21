@@ -32,36 +32,110 @@ namespace SampleEntityFramework
             //UpdateBook();
             //DeleteBook();
 
-            
+
             #endregion
 
-            
+            Console.WriteLine("1_1");
             Exercise13_1_1();
             
-            Console.WriteLine("---------------------------------");
+            Console.WriteLine("-----------------------------------------");
 
-            
+            Console.WriteLine("1_2");
             Exercise13_1_2();
 
-            Console.WriteLine("---------------------------------");
-            
+            Console.WriteLine("-----------------------------------------");
+
+            Console.WriteLine("1_3");
             Exercise13_1_3();
 
-            Console.WriteLine("---------------------------------");
-            
+            Console.WriteLine("-----------------------------------------");
+
+            Console.WriteLine("1_4");
             Exercise13_1_4();
 
-            Console.WriteLine("---------------------------------");
-            
+            Console.WriteLine("-----------------------------------------");
+
+            Console.WriteLine("1_5");
             Exercise13_1_5();
 
-            Console.WriteLine("---------------------------------");
+            Console.WriteLine("-----------------------------------------");
 
-           
+            Console.WriteLine("1_6");
+           // Exercise13_1_6();
 
-            Console.WriteLine("---------------------------------");
+            Console.WriteLine("-----------------------------------------");
 
-            Console.ReadLine();
+            Console.WriteLine("1_7");
+            //Exercise13_1_7();
+
+            Console.WriteLine("-----------------------------------------");
+
+        }
+
+        private static void Exercise13_1_7()
+        {
+            using (var db = new BooksDbContext())
+            {
+                Console.WriteLine("名前");
+                string namedata = Console.ReadLine();
+
+                Console.WriteLine("タイトル");
+                string titledata = Console.ReadLine();
+
+                Console.WriteLine("発行年");
+                int PublishedYeardata = int.Parse(Console.ReadLine());
+
+                var author1 = db.Authors.Single(a => a.Name == namedata);
+                var book1 = new Book
+                {
+                    Title = titledata,
+                    PublishedYear = PublishedYeardata,
+                    Author = author1,
+                };
+                db.Books.Add(book1);
+
+                Console.WriteLine("----------------------------------------------");
+
+                Console.ReadLine();
+            }
+        }
+
+        private static void Exercise13_1_6()
+        {
+            Console.WriteLine("誕生日");
+            Console.WriteLine("年");
+            int birthdaydata1 = int.Parse(Console.ReadLine());
+            Console.WriteLine("月");
+            int birthdaydata2 = int.Parse(Console.ReadLine());
+            Console.WriteLine("日");
+            int birthdaydata3 = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("性別");
+            string genderdata = Console.ReadLine();
+
+            Console.WriteLine("名前");
+            string namedata = Console.ReadLine();
+
+            try
+            {
+                using (var db = new BooksDbContext())
+                {
+                    var author1 = new Author
+                    {
+                        Birthday = new DateTime(birthdaydata1, birthdaydata2, birthdaydata3),
+                        Gender = genderdata,
+                        Name = namedata
+                    };
+                    db.Authors.Add(author1);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+            
         }
 
         private static void Exercise13_1_5()
@@ -69,25 +143,17 @@ namespace SampleEntityFramework
             using (var db = new BooksDbContext())
             {
 
-                var authors = db.Books
-                                .OrderByDescending(o=>o.Author.Birthday)
-                                .Select(g=> new
-                                {
-                                    Name = g.Author.Name,
-                                    Title = g.Title,
-                                    PublishedYear = g.PublishedYear
-                                });
-                var group = authors.GroupBy(g=> g.Name);
-                foreach (var g in group)
+                var authors = db.Authors
+                                .OrderByDescending(o=>o.Birthday);
+                foreach (var author in authors)
                 {
-                    Console.WriteLine("--------");
-                    Console.WriteLine($"{g.Key}");
-                    foreach (var author in g)
+                    Console.WriteLine("-----------------------");
+                    Console.WriteLine($"{author.Name}");
+                    foreach (var book in author.Books)
                     {
-                        Console.WriteLine($"{author.Title}:{author.PublishedYear}");
+                        Console.WriteLine($"{book.Title}:{book.PublishedYear}");
                     }
                 }
-                
             }
         }
 
@@ -95,10 +161,10 @@ namespace SampleEntityFramework
         {
             using (var db = new BooksDbContext())
             {
-                var authors = db.Books.OrderBy(o=>o.PublishedYear).Take(3);
-                foreach (var author in authors)
+                var books = db.Books.OrderBy(o=>o.PublishedYear).Take(3);
+                foreach (var book in books)
                 {
-                    Console.WriteLine($"{author.Title}:{author.PublishedYear}:{author.Author.Name}");
+                    Console.WriteLine($"{book.Title}:{book.Author.Name}:{book.PublishedYear}");
                 }
             }
         }
@@ -107,8 +173,12 @@ namespace SampleEntityFramework
         {
             using (var db = new BooksDbContext())
             {
-                var authors = db.Books.Where(a=> a.Title.Length == db.Books.Max(x=>x.Title.Length)).First();
-                Console.WriteLine($"{authors.Title}:{authors.PublishedYear}:{authors.Author.Name}");
+                var authors = db.Books.Where(a=> a.Title.Length == db.Books.Max(x=>x.Title.Length));
+                foreach (var author in authors)
+                {
+                    Console.WriteLine($"{author.Title}:{author.PublishedYear}:{author.Author.Name}:{author.Author.Birthday:yyyy/MM/dd}");
+                }
+                
             }
         }
 
@@ -116,13 +186,11 @@ namespace SampleEntityFramework
         {
             using (var db = new BooksDbContext())
             {
-                var authors = db.Authors;
-                foreach (var author in authors)
+                foreach (var author in db.Authors)
                 {
-                    Console.WriteLine($"{author.Name}:{author.Gender}:{author.Birthday}:{author.Id}");
+                    Console.WriteLine($"{author.Name}:{author.Gender}:{author.Birthday:yyyy/MM/dd}:{author.Id}");
                 }
-                var books = db.Books;
-                foreach (var book in books)
+                foreach (var book in db.Books)
                 {
                     Console.WriteLine($"{book.Title}:{book.PublishedYear}:{book.Id}");
                 }

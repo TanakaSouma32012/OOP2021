@@ -60,15 +60,15 @@ namespace SampleEntityFramework
 
             Console.WriteLine("-----------------------------------------");
 
-            Console.WriteLine("1_6");
-           // Exercise13_1_6();
+            //Console.WriteLine("1_6");
+            //Exercise13_1_6();
 
-            Console.WriteLine("-----------------------------------------");
+            //Console.WriteLine("-----------------------------------------");
 
-            Console.WriteLine("1_7");
+            //Console.WriteLine("1_7");
             //Exercise13_1_7();
 
-            Console.WriteLine("-----------------------------------------");
+            //Console.WriteLine("-----------------------------------------");
 
         }
 

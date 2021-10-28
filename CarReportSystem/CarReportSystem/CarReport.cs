@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarReportSystem {
+namespace CarReportSystem
+{
     [Serializable]
-    public class CarReport {
+    public class CarReport
+    {
         [DisplayName("日付")]
-        public DateTime Date{get; set;}
+        public DateTime Date { get; set; }
         [DisplayName("記録者")]
         public string Auther { get; set; }
         [DisplayName("メーカー")]
@@ -23,7 +25,8 @@ namespace CarReportSystem {
         public Image Picture { get; set; }
 
         //メーカー
-        public enum MakarGroup {
+        public enum MakarGroup
+        {
             トヨタ,
             日産,
             ホンダ,
@@ -37,7 +40,8 @@ namespace CarReportSystem {
                          MakarGroup maker,
                          string carName,
                          string report,
-                         Image picture) {
+                         Image picture)
+        {
             this.Date = date;
             this.Auther = auther;
             this.Maker = maker;
@@ -50,8 +54,4 @@ namespace CarReportSystem {
 
 
     }
-
-    
-
-    
 }

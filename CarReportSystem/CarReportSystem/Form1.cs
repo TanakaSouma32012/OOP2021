@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace CarReportSystem {
     public partial class fmMain : Form {
         BindingList<CarReport> listCarReport = new BindingList<CarReport>();
-
+        
         public fmMain() {
             InitializeComponent();
             //dgvRegistData.DataSource = listCarReport;
@@ -168,9 +168,11 @@ namespace CarReportSystem {
         private void btConnect_Click(object sender, EventArgs e) {
             // TODO: このコード行はデータを 'infosys202102DataSet.CarReport' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
             this.carReportTableAdapter.Fill(this.infosys202102DataSet.CarReport);
-
-
-
+            for (int i = 0; i < carReportDataGridView.RowCount; i++)
+            {
+                setCbAuthor(carReportDataGridView.Rows[i].Cells[2].Value.ToString());
+                setCbCarName(carReportDataGridView.Rows[i].Cells[4].Value.ToString());
+            }
 #if false
             if (ofdFileOpen.ShowDialog() == DialogResult.OK) {
                 try {
@@ -205,21 +207,20 @@ namespace CarReportSystem {
         }
 
         private void fmMain_Load(object sender, EventArgs e) {
-            
-            //dgvRegistData.Columns[5].Visible = false;
+            carReportDataGridView.Columns[0].Visible = false;
+            carReportDataGridView.Columns[1].HeaderText = "日付";
         }
 
         private void carReportBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-
             this.Validate();
             this.carReportBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.infosys202102DataSet);
-
         }
 
         private void carReportDataGridView_SelectionChanged(object sender, EventArgs e)
         {
+            if (carReportDataGridView.CurrentRow == null) return;
             try
             {
                 btpDate.Value = (DateTime)carReportDataGridView.CurrentRow.Cells[1].Value;  //日付
@@ -236,7 +237,6 @@ namespace CarReportSystem {
             }
             catch (Exception)
             {
-
                 pbPicture.Image = null;
             }
 
@@ -256,6 +256,26 @@ namespace CarReportSystem {
             ImageConverter imgconv = new ImageConverter();
             byte[] b = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
             return b;
+        }
+        DateTime initial_date = new DateTime(2021, 1, 1);
+        private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
+        {
+            
+            btpDate.Value = initial_date;
+            cdAuthor.Text = null;
+            rbOther.Checked = true;
+            cbCarName.Text = null;
+            tbReport.Text = null;
+            pbPicture.Image = null;
+        }
+
+
+
+
+
+        private void carReportDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
         }
     }
 }

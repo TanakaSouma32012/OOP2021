@@ -91,12 +91,6 @@ namespace CarReportSystem {
             cbCarName.Text = selectedcar.CarName;
             tbReport.Text = selectedcar.Report;
             pbPicture.Image = selectedcar.Picture;
-
-            //foreach (var rb in gbMaker.Controls) {
-            //    if (selectedcar.Maker == (CarReport.MakarGroup)int.Parse((string)((RadioButton)rb).Tag)) {
-            //        ((RadioButton)rb).Checked = true;
-            //    }
-            //}
         }
 
         private void setMakerRedioButton(CarReport.MakarGroup mg) {
@@ -122,21 +116,13 @@ namespace CarReportSystem {
             }
         }
         private void btDataDelete_Click(object sender, EventArgs e) {
-            //listCarReport.RemoveAt(dgvRegistData.CurrentRow.Index);
+            
         }
         private void btDataCorrect_Click(object sender, EventArgs e) {
-            //listCarReport[dgvRegistData.CurrentRow.Index].UpDate(
-            //    btpDate.Value, 
-            //    cdAuthor.Text,
-            //    selectedGroup(), 
-            //    cbCarName.Text,
-            //    tbReport.Text,
-            //    pbPicture.Image);
-
-            //dgvRegistData.Refresh();  //コントロールの強制再描画
         }
         //更新ボタンイベント処理
         private void btUpdate_Click(object sender, EventArgs e) {
+            bindingNavigatorAddNewItem.Enabled = true;
             if (carReportDataGridView.CurrentRow == null) return;
 
             carReportDataGridView.CurrentRow.Cells[1].Value = btpDate.Value;  //日付
@@ -220,6 +206,7 @@ namespace CarReportSystem {
 
         private void carReportDataGridView_SelectionChanged(object sender, EventArgs e)
         {
+            bindingNavigatorAddNewItem.Enabled = true;
             if (carReportDataGridView.CurrentRow == null) return;
             try
             {
@@ -234,25 +221,37 @@ namespace CarReportSystem {
                 cbCarName.Text = carReportDataGridView.CurrentRow.Cells[4].Value.ToString();  //車名
                 tbReport.Text = carReportDataGridView.CurrentRow.Cells[5].Value.ToString();  //レポート
                 pbPicture.Image = ByteArrayToImage((byte[])carReportDataGridView.CurrentRow.Cells[6].Value);  //画像
+                ssErrorLavel.Text = "";
             }
-            catch (Exception)
+            catch (InvalidCastException)
             {
                 pbPicture.Image = null;
             }
+            catch(Exception ex)
+            {
+                ssErrorLavel.Text = ex.Message;
+            }
 
             
-
         }
+
         // バイト配列をImageオブジェクトに変換
         public static Image ByteArrayToImage(byte[] b)
         {
-            ImageConverter imgconv = new ImageConverter();
-            Image img = (Image)imgconv.ConvertFrom(b);
+            Image img = null;
+            if (b.Length > 0)
+            {
+                ImageConverter imgconv = new ImageConverter();
+                img = (Image)imgconv.ConvertFrom(b);
+
+            }
+            
             return img;
         }
         // Imageオブジェクトをバイト配列に変換
         public static byte[] ImageToByteArray(Image img)
         {
+
             ImageConverter imgconv = new ImageConverter();
             byte[] b = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
             return b;
@@ -260,7 +259,7 @@ namespace CarReportSystem {
         DateTime initial_date = new DateTime(2021, 1, 1);
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
         {
-            
+            bindingNavigatorAddNewItem.Enabled = false;
             btpDate.Value = initial_date;
             cdAuthor.Text = null;
             rbOther.Checked = true;
@@ -268,15 +267,9 @@ namespace CarReportSystem {
             tbReport.Text = null;
             pbPicture.Image = null;
         }
+        private void carReportDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e) { }
 
-
-
-
-
-        private void carReportDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-
-        }
+        
     }
 }
 

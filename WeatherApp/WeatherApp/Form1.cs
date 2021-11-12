@@ -30,7 +30,7 @@ namespace WeatherApp
                     var results1 = GetWeatherReportFromYahoo(4210);
                     foreach (var s in results1)
                     {
-                        textBox1.Text = s;
+                        //textBox1.Text = s;
                         //Console.WriteLine(s);
                     }
                     Console.ReadLine();

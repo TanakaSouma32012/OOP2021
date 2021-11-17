@@ -20,20 +20,32 @@ namespace NumberGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        Random random = new System.Random();
+        private int r1;
+        private int numC = 0;
         public MainWindow()
         {
-            Random random = new System.Random();
-            
+            r1 = random.Next(1,26);
             InitializeComponent();
+            AnswerText.Text = "クリック数：" + numC;
         }
         public void Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
+            numC = numC + 1;
+            if (int.Parse(button.Content.ToString()) == r1)
+            {
+                AnswerText.Text = "正解は：" + r1 + "　クリック数：" + numC;
 
-            //if (button.Content.ToString() == Random)
-            //{
-
-            //}
+            }
+            else if(int.Parse(button.Content.ToString()) > r1)
+            {
+                AnswerText.Text = "大きい　クリック数" + numC;
+            }
+            else
+            {
+                AnswerText.Text = "小さい　クリック数" + numC;
+            }
         }
     }
 }

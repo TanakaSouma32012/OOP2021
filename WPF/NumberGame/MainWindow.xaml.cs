@@ -20,31 +20,75 @@ namespace NumberGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        Random random = new System.Random();
-        private int r1;
-        private int numC = 0;
+        private Random  random = new Random();
+        private int answerNum;
+        private const int Rows = 7;     //行
+        private const int Columns = 7;  //列
+
+        private SolidColorBrush selectedButtonColor = new SolidColorBrush(Colors.Yellow);
+        private SolidColorBrush hitButtonColor = new SolidColorBrush(Colors.Red);
+
         public MainWindow()
         {
-            r1 = random.Next(1,26);
-            InitializeComponent();
-            AnswerText.Text = "クリック数：" + numC;
+            InitializeComponent();            
         }
-        public void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            numC = numC + 1;
-            if (int.Parse(button.Content.ToString()) == r1)
-            {
-                AnswerText.Text = "正解は：" + r1 + "　クリック数：" + numC;
 
-            }
-            else if(int.Parse(button.Content.ToString()) > r1)
+        //ロード時に一度だけ実行される
+        private void MainDisp_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Button> buttons = new List<Button>();
+            //正解を取得
+            answerNum = random.Next(Rows * Columns) + 1;
+
+            //行
+            for (int i = 0; i < Rows; i++)
             {
-                AnswerText.Text = "大きい　クリック数" + numC;
+                grid.RowDefinitions.Add(new RowDefinition());
+            }
+            //列
+            for (int j = 0; j < Columns; j++)
+            {
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+            int num1 = 0;
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    var bt = new Button();
+                    bt.Width = MainForm.Width / Columns;
+                    bt.Height = MainForm.Height/Rows;
+                    
+                    bt.Content = num1 += 1;
+
+                    bt.FontSize = 20;
+                    bt.Click += Bt_Click;
+                    Grid.SetRow(bt, i);
+                    Grid.SetColumn(bt, j);
+                    buttons.Add(bt);
+                }
+            }
+
+            buttons.ForEach(bt => grid.Children.Add(bt));
+            MainForm.Height += textDisp.Height + textDisp.Height + 20;
+
+        }
+
+        private void Bt_Click(object sender, RoutedEventArgs e)
+        {
+            Button selectedButton = (Button)sender;
+            int num = (int)selectedButton.Content;
+            if (int.Parse(selectedButton.Content.ToString()) == answerNum)
+            {
+                textDisp.Text = "正解は：" + answerNum;
+            }
+            else if (int.Parse(selectedButton.Content.ToString()) > answerNum)
+            {
+                textDisp.Text = "大きい：";
             }
             else
             {
-                AnswerText.Text = "小さい　クリック数" + numC;
+                textDisp.Text = "小さい：";
             }
         }
     }

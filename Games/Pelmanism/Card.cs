@@ -15,20 +15,20 @@ namespace Pelmanism
         private const int SizeW = 50, SizeH = 70;
 
         //カードの絵柄
-        public string Picture { get; set; }
+        public Image Picture { get; set; }
         //カードの状態（true:表　false:裏）
         public bool State { get; set; }
         //カード表面の色
         public Color OpenColor { get; } = Color.White;
         //カード裏面の色
         public Color CloseColor { get; } = Color.LightSeaGreen;
-        public Card(string picture) 
+        public Card(Image picture) 
         {
             Picture = picture;
             State = false;
             Size = new Size(SizeW, SizeH);
             BackColor = CloseColor;
-            Font = new Font("MS UI Gothic", 14, FontStyle.Bold);
+            Font = new Font("MS UI Gothic", 4, FontStyle.Bold);
             Enabled = false;
 
         }
@@ -38,16 +38,16 @@ namespace Pelmanism
         {
             State = true;　//表
             BackColor = OpenColor;
-            Text = Picture;
+            Image = Picture;
             Enabled = false; //選択不可
         }
 
         //カードをクローズする
         public void Close()
         {
-            State = false;　//表
-            BackColor = OpenColor;
-            Text = "";
+            State = false;　//裏
+            BackColor = CloseColor;
+            Image = null;
             Enabled = true; //選択不可
         }
 

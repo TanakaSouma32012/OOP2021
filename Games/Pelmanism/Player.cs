@@ -24,7 +24,7 @@ namespace Pelmanism
         public Player()
         {
             NowOpenCardIndex1 = nowOpenCardIndex1 = -1;
-            BeforeOpenCardIndex1 = BeforeOpenCardIndex2 = -1;
+            BeforeOpenCardIndex2 = BeforeOpenCardIndex2 = -1;
             OpenCounter = 0;
         }
 
